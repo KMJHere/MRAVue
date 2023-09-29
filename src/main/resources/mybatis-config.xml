@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>	
+	<!-- setting : mybatis 구동 시 선언할 설정들을 작성하는 영역 -->
+	<settings>
+		<!-- null이 담긴 값은 빈칸(빈 문자열)으로 인식. 그것을 null로 인식하라는 세팅 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+</configuration>

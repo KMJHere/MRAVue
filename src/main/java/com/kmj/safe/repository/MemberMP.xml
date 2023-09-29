@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmj.safe.repository.MemberMP">
+	<select id="getMember" resultType="com.kmj.safe.model.Member"> 
+		Select
+			COMPANY_ID,  -- 회사ID
+			USER_NO,  -- 사용자번호 
+			USER_ID,  -- 사용자ID
+			PASS_ID,  -- 암호
+			USER_NM,  -- 사용자명
+			TEL_NO,  -- 전화번호
+			MOBILE_NO,  -- 휴대폰번호
+			EMAIL,  -- 이메일ID
+			USER_GB,  -- 사용자구분 [ADMIN:관리자 NORMAL:일반사용자 GUEST:게스트]
+			POSITION_CD,  -- 직위
+			USE_TF,  -- 사용여부 [T, F]
+			PROJ_CODE  -- 대표현장
+		From 
+			TCC_EMPLOYEE
+		Where 1 = 1
+		And USER_ID = #{USER_ID} 
+	</select>
+
+	<insert id="createMember">
+		Insert Into TCC_EMPLOYEE
+		(
+			COMPANY_ID,
+			USER_NO,
+			USER_ID,
+			PASS_ID,
+			USER_NM,
+			TEL_NO,
+			MOBILE_NO,
+			EMAIL,
+			USER_GB,
+			POSITION_CD,
+			USE_TF,
+			PROJ_CODE,
+			CRTUSERNO,
+			CRTDATE,
+			MODUSERNO,
+			MODDATE
+		) Values (
+			#{COMPANY_ID},
+			SSF_EMPLOYEE.Nextval,
+			#{USER_ID},
+			#{PASS_ID},
+			#{USER_NM},
+			#{TEL_NO},
+			#{MOBILE_NO},
+			#{EMAIL},
+			'T',
+			#{POSITION_CD},
+			'T',
+			#{PROJ_CODE},
+			null,
+			Sysdate, 
+			null,
+			Sysdate
+		)
+	</insert>	
+	
+	<update id="updateMember">
+		Update TCC_EMPLOYEE
+		Set
+			USER_NM = #{USER_NM}, 
+			TEL_NO = #{TEL_NO},
+			MOBILE_NO = #{MOBILE_NO},
+			EMAIL = #{EMAIL},
+			USER_GB = #{USER_GB},
+			POSITION_CD = #{POSITION_CD},
+			USE_TF = #{USE_TF},
+			PROJ_CODE = #{PROJ_CODE},
+			CRTUSERNO = #{SESSION_USER_NO},
+			CRTDATE = Sysdate,
+			MODUSERNO = #{SESSION_USER_NO},
+			MODDATE = Sysdate
+		Where 1 = 1
+		And COMPANY_ID = #{COMPANY_ID}
+		And USER_NO = #{USER_NO}	
+	</update>
+
+	<delete id = "deleteMember">
+	</delete>
+
+
+
+
+</mapper>

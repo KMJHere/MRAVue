@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmj.safe.repository.CommonMP">
+	<select id="selectCompanyLst"  resultType="Map"> 
+		Select
+			x.TOT_CN,
+			x.FILTERED_CN,
+			x.RN SORT_NO,
+			x.COMPANY_ID,
+			x.BIZ_NO,
+			x.COMPANY_NAME,
+			x.BOSS,
+			x.BIZPLACE_ZIPCODE,
+			x.BIZPLACE_ADDR1,
+			x.BIZPLACE_ADDR2,
+			x.TELNO,
+			x.USE_TF,
+			x.CPN_LOGO_URL
+		From
+			(
+				Select
+					Count(*) Over() TOT_CN,
+					Count(*) Over() FILTERED_CN,
+					Row_Number() Over(Order By COMPANY_ID) RN,
+					COMPANY_ID,  -- 회사ID              
+					Sf_Format_String('BIZNO', BIZNO) BIZ_NO,  -- 사업자번호
+					COMPANY_NAME,  -- 회사명
+					BOSS,  -- 대표자명
+					BIZPLACE_ZIPCODE,  -- 사업장 우편번호
+					BIZPLACE_ADDR1,  -- 사업장 우편번호주소
+					BIZPLACE_ADDR2,  -- 사업장 상세주소
+					TELNO,  -- 전화번호
+					USE_TF,  -- 사용여부 [T, F]
+					CPN_LOGO_URL  -- 회사로고URL
+				From	
+					TCC_COMPANY_ID 
+				Where 1 = 1
+				And COMPANY_NAME Like '%' || #{companyName} || '%'
+			) x
+		Where 1 = 1
+		And x.RN Between #{dtStart} + 1 And #{dtStart} + #{dtLength}
+	</select>
+	
+	<select id="selectProjLst"  resultType="Map"> 
+		Select
+			x.TOT_CN,
+			x.FILTERED_CN,
+			x.RN SORT_NO,
+			x.COMPANY_ID,
+			x.PROJ_CODE,
+			x.PROJ_NAME,
+			x.USE_TF,
+			x.RMK
+		From
+			(
+				Select
+					Count(*) Over() TOT_CN,
+					Count(*) Over() FILTERED_CN,
+					Row_Number() Over(Order By PROJ_CODE) RN,
+					COMPANY_ID,  -- 회사ID
+					PROJ_CODE,  -- 현장코드
+					PROJ_NAME,  -- 현장명
+					USE_TF,  -- 사용여부 [T, F]
+					RMK  -- 비고
+				From	
+					TCC_PROJ_CODE 
+				Where 1 = 1
+				And COMPANY_ID = #{companyId}
+				And PROJ_NAME Like '%' || #{projName} || '%'
+			) x
+		Where 1 = 1
+		And x.RN Between #{dtStart} + 1 And #{dtStart} + #{dtLength}
+	</select>
+	
+	<select id="selectPosiLst"  resultType="Map">
+		Select
+			x.SCM_DTL_SEQ,
+			x.CODE_NM,
+			x.CODE_DTL_NM,
+			x.USE_TF
+		From
+			VCM_GROUP_CODE x
+		Where 1 = 1
+		And x.CODE_NM = #{grpCodeNm}
+	</select>
+</mapper>

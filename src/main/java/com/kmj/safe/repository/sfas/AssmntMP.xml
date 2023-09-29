@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmj.safe.repository.sfas.AssmntMP">
+	<select id="selectAssmntLst" resultType="com.kmj.safe.model.AssmntContent" parameterType="map"> 
+		Select			
+			COMPANY_ID,
+			PROJ_CODE,
+			R_COMPANY_ID,
+			REGIS_SEQ,
+			CRTUSERNO,
+			CRTDATE,
+			MODUSERNO,
+			MODDATE,
+			Decode(CHECK_TF, 'T', '접수', '등록') CHECK_TF,
+			SF_DT_TO_STR(MNG_DATE_FROM, 'DATE') MNG_DATE_FROM,
+			SF_DT_TO_STR(MNG_DATE_TO, 'DATE') MNG_DATE_TO,
+			SF_STR_FM(STAN_MONTH, 'MON') STAN_MONTH,
+			STAN_DEGREE,
+			MAIN_CNSTRCT,
+			JFILE_GRP_NO,
+			CNL_CMT,
+			APPRV_CMT,
+			#{COMPANY_ID} TEST
+		From
+			TSF_ASSMNT_RECEIVE
+		Where 1 = 1
+		And COMPANY_ID = #{COMPANY_ID}
+	</select>
+	
+	<select id="selectAssmnDtltLst" resultType="com.kmj.safe.model.AssmntContent"> 
+		Select
+			CRTUSERNO,
+			CRTDATE,
+			MODUSERNO,
+			MODDATE,
+			CONSTRCT_NAME,
+			PLACE,
+			RISK_FACT,
+			DISASTER_FORM,
+			ASSMNT_RANK,
+			PRIORITY,
+			IMPRV_MTHD,
+			WORK_FROM,
+			IMPRV_FROM,
+			WORK_STAFF,
+			IMPRV_CHECK_USER,
+			WORK_TO,
+			IMPRV_TO,
+			CONSTRCT_CODE,
+			IMPROV_EDU_USER,
+			COMPANY_ID,
+			PROJ_CODE,
+			R_COMPANY_ID,
+			REGIS_SEQ,
+			REGIS_DETAIL_SEQ,
+			EXAMINE_CONSTRCT,
+			EXAMINE_SAFETY,
+			IMPRV_CHK_USER_NO,
+			IMPRV_EDU_USER_NO,
+			SORT_NO,
+			ACC_TF,
+			PRE_REGIS_DETAIL_SEQ,
+			REG_MNG_CD
+		From TSF_ASSMNT_RECEIVE_DETAIL
+		Where 1 = 1
+		And COMPANY_ID = #{COMPANY_ID}
+		And PROJ_CODE = #{PROJ_CODE}
+		And R_COMPANY_ID = #{R_COMPANY_ID}
+		And REGIS_SEQ = #{REGIS_SEQ}			
+	</select>
+	
+	<insert id="insertAssmntLst">
+		Insert Into TSF_ASSMNT_RECEIVE
+		(
+			COMPANY_ID,
+			PROJ_CODE,
+			R_COMPANY_ID,
+			REGIS_SEQ,
+			CRTUSERNO,
+			CRTDATE,
+			MODUSERNO,
+			MODDATE,
+			CHECK_TF,
+			MNG_DATE_FROM,
+			MNG_DATE_TO,
+			STAN_MONTH,
+			STAN_DEGREE,
+			MAIN_CNSTRCT,
+			JFILE_GRP_NO,
+			CNL_CMT,
+			APPRV_CMT
+		) Values (
+			#{COMPANY_ID},
+			#{PROJ_CODE},
+			#{R_COMPANY_ID},
+			SSF_ASSMNT_RECEIVE.Nextval,
+			#{SESSION_USER_NO},
+			Sysdate,
+			#{SESSION_USER_NO},
+			Sysdate,
+			#{CHECK_TF},
+			#{MNG_DATE_FROM},
+			#{MNG_DATE_TO},
+			#{STAN_MONTH},
+			#{STAN_DEGREE},
+			#{MAIN_CNSTRCT},
+			#{JFILE_GRP_NO},
+			#{CNL_CMT},
+			#{APPRV_CMT}
+		)
+	</insert>	
+	
+	<insert id="insertAssmntDtlLst">
+		Insert Into TSF_ASSMNT_RECEIVE_DETAIL
+		(
+			CRTUSERNO,
+			CRTDATE,
+			MODUSERNO,
+			MODDATE,
+			CONSTRCT_NAME,
+			PLACE,
+			RISK_FACT,
+			DISASTER_FORM,
+			ASSMNT_RANK,
+			PRIORITY,
+			IMPRV_MTHD,
+			WORK_FROM,
+			IMPRV_FROM,
+			WORK_STAFF,
+			IMPRV_CHECK_USER,
+			WORK_TO,
+			IMPRV_TO,
+			CONSTRCT_CODE,
+			IMPROV_EDU_USER,
+			COMPANY_ID,
+			PROJ_CODE,
+			R_COMPANY_ID,
+			REGIS_SEQ,
+			REGIS_DETAIL_SEQ,
+			EXAMINE_CONSTRCT,
+			EXAMINE_SAFETY,
+			IMPRV_CHK_USER_NO,
+			IMPRV_EDU_USER_NO,
+			SORT_NO,
+			ACC_TF,
+			PRE_REGIS_DETAIL_SEQ,
+			REG_MNG_CD
+		) Values (
+			#{SESSION_USER_NO},
+			Sysdate,
+			#{SESSION_USER_NO},
+			Sysdate,
+			#{CONSTRCT_NAME},
+			#{PLACE},
+			#{RISK_FACT},
+			#{DISASTER_FORM},
+			#{ASSMNT_RANK},
+			#{PRIORITY},
+			#{IMPRV_MTHD},
+			#{WORK_FROM},
+			#{IMPRV_FROM},
+			#{WORK_STAFF},
+			#{IMPRV_CHECK_USER},
+			#{WORK_TO},
+			#{IMPRV_TO},
+			#{CONSTRCT_CODE},
+			#{IMPROV_EDU_USER},
+			#{COMPANY_ID},
+			#{PROJ_CODE},
+			#{R_COMPANY_ID},
+			#{REGIS_SEQ},
+			SSF_ASSMNT_RECEIVE_DETAIL.NextVal,
+			#{EXAMINE_CONSTRCT},
+			#{EXAMINE_SAFETY},
+			#{IMPRV_CHK_USER_NO},
+			#{IMPRV_EDU_USER_NO},
+			#{SORT_NO},
+			#{ACC_TF},
+			#{PRE_REGIS_DETAIL_SEQ},
+			#{REG_MNG_CD}
+		)
+	</insert>
+
+
+</mapper>
