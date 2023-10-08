@@ -29,6 +29,9 @@ public class UserLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
 		
 		HttpSession session = request.getSession();
 
+		System.out.println("getUsername: " + member.getUsername());
+		System.out.println("member: " + member.getUserNm());
+		
     	session.setAttribute("COMPANY_ID", String.valueOf(member.getCompanyId()));
     	session.setAttribute("USER_NO", String.valueOf(member.getUserno()));
     	session.setAttribute("USER_ID", member.getUsername());
@@ -37,7 +40,7 @@ public class UserLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
     	userInfo.setSessionData(session);
 
     	if(userInfo.getIsLogin() == false) {
-    		response.sendRedirect("/login");
+    		response.sendRedirect("/mraLogin.html");
     	} else {
     		response.sendRedirect("/");
     	}

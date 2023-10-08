@@ -10,21 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 public class LoginInterceptor implements HandlerInterceptor {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired 
-	private UserInfo userInfo;
-	
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.info("LoginInterceptor preHandler");
-		
-		HttpSession session = request.getSession();
-		
-		//userInfo.setSessionData(session);
-		
-		
-		
-		
-		return true;
-	}
+//	private Logger logger = LoggerFactory.getLogger(this.getClass());
+//	
+//	@Autowired 
+//	private UserInfo userInfo;
+//	
+//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//		logger.info("LoginInterceptor preHandler");
+//		
+//		HttpSession session = request.getSession();
+//		
+//		//userInfo.setSessionData(session);
+//
+//		return true;
+//	}
 }

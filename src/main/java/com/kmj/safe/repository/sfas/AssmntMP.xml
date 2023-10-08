@@ -24,7 +24,7 @@
 		From
 			TSF_ASSMNT_RECEIVE
 		Where 1 = 1
-		And COMPANY_ID = #{COMPANY_ID}
+		And COMPANY_ID = 1
 	</select>
 	
 	<select id="selectAssmnDtltLst" resultType="com.kmj.safe.model.AssmntContent"> 

@@ -28,7 +28,7 @@ public class SecurityConfig {
     
     @Bean
     public WebSecurityCustomizer configure() {
-    	return (web) -> web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/plugin/**", "/font/**", "/assets/**");
+    	return (web) -> web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/plugin/**", "/font/**", "/assets/**", "/*/**");
     }
 
     @Bean
@@ -36,7 +36,7 @@ public class SecurityConfig {
         http.authorizeRequests(auth -> auth.antMatchers("/login/**", "/join/**").permitAll()
 				.anyRequest().authenticated());
                 
-        http.formLogin(login ->	login.loginPage("/index.html") 
+        http.formLogin(login ->	login.loginPage("/mraLogin") 
         		.successHandler(successHandler())
         		.failureHandler(failureHandler()) 
 				.loginProcessingUrl("/login_proc") //post mapping 주소, security 처리 

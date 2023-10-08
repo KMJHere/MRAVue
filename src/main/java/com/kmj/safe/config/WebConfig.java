@@ -8,12 +8,12 @@ import com.kmj.safe.common.LoginInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		// TODO Auto-generated method stub
-		registry
-			.addInterceptor(new LoginInterceptor())
-			.addPathPatterns("/**") 
-			.excludePathPatterns("/login/**", "/join/**", "/css/**", "/img/**", "/js/**", "/plugin/**", "/font/**", "/assets/**");
-	}
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		// TODO Auto-generated method stub
+//		registry
+//			.addInterceptor(new LoginInterceptor())
+//			.addPathPatterns("/**") 
+//			.excludePathPatterns("/login/**", "/join/**", "/css/**", "/img/**", "/js/**", "/plugin/**", "/font/**", "/assets/**");
+//	}
 }
