@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kmj.safe.service.sfas.AssmntService;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class AssmntController {
 	@Autowired 
 	private AssmntService assmntService;
 
-	@CrossOrigin(origins = "http://localhost:8080/assmntList")
 	@GetMapping("/sfas/AssmntList")
 	public List<AssmntContent> selectAssmntLst(Model model) throws Exception {	
 		
