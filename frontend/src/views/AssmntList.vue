@@ -11,11 +11,19 @@
                   <i class="fa fa-globe"></i>위험성평가서
                 </h3>
               </td>
+              <td>
+                <button class="btn btn-warning btn-xs" @click="addRow">
+                  <i class="fa fa-pencil"></i> 행추가
+                </button>
+                <button class="btn btn-warning btn-xs" @click="save">
+                  <i class="fa fa-pencil"></i> 저장
+                </button>
+              </td>
             </tr>
           </table>
         </div>
         <div class="panel-body" style="height: 200px; overflow-y: auto">
-          <table class="table table-bordered">
+          <table contenteditable class="table table-bordered">
             <thead>
               <tr>
                 <th>NO</th>
@@ -33,13 +41,13 @@
               <tr v-for="(row, index) in assmntLst" v-bind:key="row.REGIS_SEQ">
                 <td>{{index+1}}</td>
                 <td>{{row.check_TF}}</td>
-                <td>{{row.stan_MONTH}}</td> 
-                <td>{{row.stan_DEGREE}}</td>
-                <td>{{row.mng_DATE_FROM}}</td>
-                <td>{{row.mng_DATE_TO}}</td>
-                <td>{{row.r_COMPANY_ID}}</td>
-                <td>{{row.main_CNSTRCT}}</td>
-                <td>{{row.apprv_CMT}}</td>
+                <td><input class="form-control" v-model="row.stan_MONTH" /></td> 
+                <td><input class="form-control" v-model="row.stan_DEGREE" /></td>
+                <td><input class="form-control" v-model="row.mng_DATE_FROM" /></td>
+                <td><input class="form-control" v-model="row.mng_DATE_TO" /></td>
+                <td><input class="form-control" v-model="row.r_COMPANY_ID" /></td>
+                <td><input class="form-control" v-model="row.main_CNSTRCT" /></td>
+                <td><input class="form-control" v-model="row.apprv_CMT" /></td>
                 <!-- 
                 <td>
                   <a
@@ -298,8 +306,23 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        });
+        })
     },
+    addRow() {
+      this.assmntLst.push({check_TF:"등록", COMPANY_ID:2})
+    },
+    save() {
+      axios
+        .post("http://localhost:8081/sfas/insertAssmntList", this.assmntLst)
+        .then((response) => {
+          console.log(response.data)
+        
+         // this.assmntLst = response.data
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   },
 };
 </script>

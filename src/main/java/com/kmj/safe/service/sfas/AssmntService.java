@@ -26,4 +26,12 @@ public class AssmntService {
 	public List<AssmntDtlContent> selectAssmntDtlLst(String REGIS_SEQ) throws Exception {
 		return assmntMP.selectAssmnDtltLst(REGIS_SEQ);
 	}
+	
+	public void insertAssmntLst(List<AssmntContent> assmntContent) throws Exception {		
+		for(AssmntContent model : assmntContent) {
+			System.out.println("MODEL" + model);
+			assmntMP.insertAssmntLst(model);
+		}
+	}
+
 }
