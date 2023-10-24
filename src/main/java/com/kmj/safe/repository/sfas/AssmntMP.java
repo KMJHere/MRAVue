@@ -17,4 +17,6 @@ public interface AssmntMP {
 	int insertAssmntLst(AssmntContent assmntContent);
 	
 	int insertAssmntDtlLst(AssmntDtlContent assmntContent);
+	
+	int updateAssmntLst(AssmntContent assmntContent);
 }

@@ -23,4 +23,5 @@ public class AssmntContent extends Common {
 	private Integer JFILE_GRP_NO; // 파일그룹번호
 	private String CNL_CMT; // 접수취소사유
 	private String APPRV_CMT;  // 현장소장의견
+	private String ROW_TYPE; // 문서상태 
 }

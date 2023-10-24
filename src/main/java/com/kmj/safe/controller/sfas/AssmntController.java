@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.kmj.safe.model.AssmntContent;
 import com.kmj.safe.model.AssmntDtlContent;
+import com.kmj.safe.model.ResultAssmntContent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +47,12 @@ public class AssmntController {
 	
 	@PostMapping("/sfas/insertAssmntList")
 	public String insertAssmntLst(@RequestBody List<AssmntContent> assmntContent) throws Exception {	
-        assmntService.insertAssmntLst(assmntContent);
+        assmntService.saveAssmntLst(assmntContent);
         return "";
+	}
+	
+	@PutMapping("/sfas/updateAssmntList")
+	public ResultAssmntContent updateAssmntLst(@RequestBody List<AssmntContent> assmntContent) throws Exception {	
+        return assmntService.saveAssmntLst(assmntContent);
 	}
 }

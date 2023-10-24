@@ -20,6 +20,7 @@
 			JFILE_GRP_NO,
 			CNL_CMT,
 			APPRV_CMT,
+			'' ROW_TYPE,
 			#{COMPANY_ID} TEST
 		From
 			TSF_ASSMNT_RECEIVE
@@ -180,6 +181,13 @@
 			#{REG_MNG_CD}
 		)
 	</insert>
-
-
+	
+	<update id="updateAssmntLst">
+		Update TSF_ASSMNT_RECEIVE
+		Set
+			APPRV_CMT = #{APPRV_CMT}
+		Where 1 = 1
+		And COMPANY_ID = #{COMPANY_ID}
+		And REGIS_SEQ = #{REGIS_SEQ}
+	</update>
 </mapper>
